@@ -1,0 +1,494 @@
+
+DCP 
+
+#########################
+Day - 1 - 23rd Oct. 2023
+#########################
+	
+	Introduction to DevOps ::::
+	
+		DevOps :::::
+		
+	Softare Development LifeCycle :: SDLC 
+	
+		- Requirement Analysis 
+		- Design
+		- Code/Development
+		- Testing 
+		- Implementations / Deployment 
+		- Maintainence/Monitoring
+	
+	Software : 
+	
+		Application Software :	Banking/Insurance/Retails/Tele-Comm/
+			
+				Web-Application
+				Mobile-Application
+				Desktop-Application
+				
+		System Software :
+				Operating System 
+				Middleware Products 
+				Chip level programming
+		
+	IT - Services 
+		
+	Softare Development LifeCycle :: SDLC 
+	
+		- Requirement Analysis 
+		- Design
+		- Code/Development
+		- Testing 
+		- Implementations / Deployment 
+		- Maintainence/Monitoring	
+	
+	
+	SDLC Methologies :::
+	
+		Water-fall Model :	--> Linear/Sequential in fashion 
+								Top-Down Approch 
+								6 - 9 months 
+		Retails - E_Commerce / Billing System
+
+			Functions/Modules
+	Core_project 
+		- Requirement Analysis 
+		- Design
+		- Code/Development
+		- Testing 
+		- Implementations / Deployment 
+		- Maintainence/Monitoring
+
+
+	Enhancement-project		
+		- Requirement Analysis 
+		- Design
+		- Code/Development
+		- Testing 
+		- Implementations / Deployment 
+		- Maintainence/Monitoring
+		
+	
+		Tele-Comm ::
+		
+			SP1 --> Wants to introduce a new offer/service to their customer -> implemented ASAP...
+			SP2 --> ...............
+			
+	
+	AGILE Methodologies :::
+	
+		Retails - E_Commerce / Billing System --> 		20 Modules
+												Functions/Modules
+	
+	Module1/Iteration1				USER_REgistration
+		- Requirement Analysis 
+		- Design
+		- Code/Development
+		- Testing 
+		- Implementations / Delivered 
+		- Maintainence/Monitoring		
+		
+	Module2/Iteration2				SIGN_IN
+		- Requirement Analysis 
+		- Design
+		- Code/Development
+		- Testing 
+		- Implementations / Delivered 
+		- Maintainence/Monitoring	
+		
+	Module-n/Iteration-n				
+		- Requirement Analysis 
+		- Design
+		- Code/Development
+		- Testing 
+		- Implementations / Delivered 
+		- Maintainence/Monitoring	
+		
+		
+	Module-21/Iteration-21				
+		- Requirement Analysis 
+		- Design
+		- Code/Development
+		- Testing 
+		- Implementations / Delivered 
+		- Maintainence/Monitoring	
+		
+		
+			Using Agile Methodologies ::
+			
+					We can able achieve ::
+					
+								Continuous Development
+								Continuous Integration 
+								Continuous Testing 
+								Continuous Delivery(Required Manual Approval for Production Release)
+									
+					We cannot achieve :: Continuous Deployment(Doesn't Required Manual Approval for Production Release)
+		
+		Dependencies .
+		Manual 
+	
+	DevOps :::
+	
+		Is a softare Development Strategy, which helps to promote the collaboration between the teams like Development Team and Operations Team to achieve Continuous Development, Continuous Integration, Continuous Testing, Continuous Delivery, Continuous Deployment and Continuous Monitoring in fully automated fashion.
+		
+	Teams involved in process :::
+	
+		DevOps Team :::				
+			Infra-Structure Team 			
+			Application Development Team 
+			Testing Team 
+			Release Management Team 
+			Production Support Team 
+			Production Monitoring Team 
+			Security Team 
+		
+		Role of DevOps Team ==> Always try to find the scope for automation.
+	
+		Infra-Structure Team 	:::
+			Provisioning the servers 			IAC(Infra-Structure As Code) Tools like Terraform - (Server Provisioning Tool)		
+			Configuration of the servers		Ansible - (Configuration Management Tools)
+	
+	DevOps Stages ::::
+		
+		Continuous Development ::  Development Team: Developers :
+					What is the role of Developer?
+					
+				Create the Application Source Code.
+				Build 	==> Process of compile the source code and create artifacts(Binaries - *.war/*.jar/*.exec/*.dll)
+				Unit Testing 
+				Promote the changes to Test Environment 
+				Notify the Testing team to pick the changes for testing
+				
+			Using DevOps Approch ::
+			
+				Create the Application Source Code, maintain the source code in a source code repository (github)
+						IDEs - Eclipse based IDEs/Visual Studio Code/Pycharm/Visual Studio
+			
+			DevOps Automate the below process :
+				Build 	==> Process of compile the source code and create artifacts(Binaries - *.war/*.jar/*.exec/*.dll)
+				Unit Testing 
+				Promote the changes to Test Environment 
+				Notify the Testing team to pick the changes for testing
+				
+			Tools :: GIT, Jenkins, Build Tools(Maven/Gradle)
+				
+		
+	    Continuous Integration ::
+				It is the capability of DEV Team to continuously integrate the changes for further Testing.
+									Promote the changes to Test Environment
+
+				Tools :: GIT, Jenkins, Docker, Kubernetes, Ansible
+			
+		Continuous Testing 
+				It helps to perform automate testing, this can integrated in DevOps work flow.
+				
+				Tools :: GIT, Jenkins, JUNIT,TESTNG,SELENIUM
+				
+			
+	    Continuous Delivery/Continuous Deployment :::
+		
+				Both Continuous Delivery/Continuous Deployment are used for Production Release.
+				
+				Continuous Delivery - (Required Manual Intervension/Approval for Production Release)
+				Continuous Deployment - (Doesn't Required Manual Approval for Production Release. It is completely automated)
+				
+				
+				Tools :: Jenkins, Docker, Kubernetes, Ansible
+				
+		Continuous Monitoring :::
+		
+				
+				Retails - E_Commerce / Online Tkt Reservation ::
+				
+				www.amazon.com 
+				
+				
+				Infra-Structure  --> Production Servers --> CPU/Memory Utilization, Network Traffic
+				
+					80% of memory 
+					
+					Tools : Promethus/Grafana/Nagios/Dynatrace
+				
+				Application Monitoring 
+				
+					Tools : AppDynamic
+					
+					
+					
+		DevOps Tools ::
+		
+			Open-Source Tools :: 
+			
+				git,jenkins,docker,kubernetes,ansible,terraform,Promethus/Grafana
+				
+			Managed Services ::
+				Cloud Service Providers ::
+				
+				AWS 	
+				AZ 
+				GCP 
+				
+Summary ::
+
+	Devops 
+	Stage 
+	Tools 
+	Roles 
+	
+#########################
+Day - 2 - 25th Oct. 2023
+#########################
+
+		DevOps Implementations 
+		DevOps LifeCycle 
+		
+		Version System using GIT.
+		
+		
+		DevOps Implementations ::::
+		
+	DevOps :::
+	
+		Is a softare Development Strategy, which helps to promote the collaboration between the teams like Development Team and Operations Team to achieve Continuous Development, Continuous Integration, Continuous Testing, Continuous Delivery, Continuous Deployment and Continuous Monitoring in fully automated fashion.		
+		
+		
+	Process ::::
+	
+		Application :
+		
+				Monolith Application Architecture  ::
+					Tightly coupled Application
+					With all the dependencies coupled together.
+						Billing System
+							Front-End 
+							Application Logic 
+								USER_Management 	==> developer - Make some changes in this module, code, test, promote to prod.	
+								Product_Management 
+								Prize_Management 
+								Billing_Management 
+								Reports
+						User-Registration System
+						
+						Banking/Insurance/Retails/Tele-Comm/		==> Legacy Applications 
+				
+				Micro-Service Based Application Architecture ::
+					Loosely Application ::
+
+					Billing System
+						Front-End 
+						Application Logic 
+							USER_Management 	(function)==> developer - Make some changes in this module, code, test, promote to prod.	
+							Product_Management 
+							Prize_Management 
+							Billing_Management 
+							Reports
+					User-Registration System			
+
+					Functions/Modules ==> micro-service
+					
+					E_Commerce - Amazon 
+					Facebook
+					Netflix 
+					google				
+				
+			E_Commerce - Amazon = www.amazon.com :::
+
+			Functions/Modules ==>	Micro-Service
+					
+					3-Tier Application -> Front-End/Application_logic/Back_end(Database)
+					
+					
+				Sign_Up 			==> Service1 => Developer1 - Make code Changes ==> Build,Unit_Test,promote the code for further Testing ==> Release to Prod.
+				Sign_In 
+				Search for products 
+				Add to Cart 
+				Place the Order 
+				Payment 
+				Confirm Order 
+				Track
+					
+		
+			Continuous Delivery :::
+					- It needs manual approval for Prod Release 
+					
+				Banking_Application ::
+					Online - banking / credit card 
+					
+						Production Release Window ==> 4hrs. to 6hrs. (Non-Business Hours)
+							Complete validation and review/ seek approvals from all stake holders for the prod release
+								--> If any issue occurs ?
+								
+										- Try to fix the issue within the Release Window .
+										
+										- Revert the changes.
+										
+			Continuous Deployment 			==> This is considered as the Matured level of DevOps.
+			
+					- Completely automated Prod Release 
+					
+					E_Commerce - Amazon 
+					Facebook
+					Netflix 
+					google
+
+		
+			
+			Implementations ::
+			
+				1. Detailed Assessment of existing Application
+		
+
+
+			DevOps LifeCycle ::::
+			
+				Coding ==> Build ==> Create Artifacts ==> Promoted to Test Environment ==> Automated Testing ==> Released to Production Environment ==> Monitoring
+				
+				
+			Environment ::::
+			
+				Non-Prod Environment										===>									Production Environment
+				
+					Dev 
+					Build 
+					Testing 
+						QA - Quality Assurance 
+						UAT - User Acceptance Testing 						===>										Prod Environment
+						
+			Tele-Comm ==>  New Service initial few days, outlets - Business Users ==> Online :::
+			
+			
+			DevOps Modules :::
+			
+			
+			Version Control System using GIT :::
+			
+				Continuous Development :::
+				
+					Developers ::: IDEs 
+					
+						Version Control System ::::
+						
+						
+						
+					<index.jsp>
+						----
+						-
+						-
+						--------
+						-------
+						-----
+						------
+						-----
+						--
+						
+					
+					1. Save the file(latest Change) ==> Unit Test	
+
+					2. Save the file(latest Change) ==> Unit Test	==> Not working as expected		
+
+							How to identify the latest change ???
+							
+					Version Control System :::
+					
+						- Is used to version control the file changes 
+						- Is used to track the changes 
+						
+						
+						<index.jsp>
+							----
+							-
+							-
+							--------
+							-------
+							-----
+							------
+							-----
+							--						
+						
+						1. index.jsp_v1.0		(Version/tag/commit_id)
+						2. index.jsp_v1.1
+						3. index.jsp_v1.2
+						4. index.jsp_v1.3
+						5. index.jsp_v1.4
+						6. index.jsp_v1.5		
+						
+					Types of Version Control System ::::
+					
+						1. Local VCS 
+						2. Centralized VCS 
+						3. Distributed VCS
+						
+						
+					GIT : Is one of the open-Source Distributed VCS 
+					
+						- It is used to version Control the changes 
+						- It is used to track the changes 
+						- It is used to perform Parallel Development
+						
+						
+						
+					Developers' Workload ::::
+					
+						- Enhancement-project
+						- Bug-fixing 
+						
+						- New Project
+						
+						
+						
+					
+					Git Workflow:: ***
+					
+					
+					Local Machine																					Remote Server
+					
+					Working Directory 		--> Staging/Index Area		--> 		Local Repository 		-->			Remote Repository
+					index.jsp						index.jsp							index.jsp_v1.0							index.jsp_v1.0
+									--------->						-----------> 						---------->	
+									git add 						git commit							git push
+					
+					
+					
+					git add 			==> Used to add the changes from Working Dir. to Staging Area
+					
+					git commit 			==> Used to Commit the changes from staging area to Local Repository 
+					
+					git push 			==> Used to push the changes from Local Repository to Remote Repository 					
+					
+					git clone 			==> Used to copy/clone the entire repository from Remote Repository to Local Machine
+					
+					git fetch/pull :: 	==> Both git fetch & git pull are used to handle the incremental Changes.
+					
+						git fetch		==> It is just to check for any incremental changes happened in remote repo.
+											If there is any changes available in remote repository it will updated only in the local repository. It will never update the changes in working Directory.
+											
+											later we can use merge/checkout command to bring the changes to from local repository to working dir.
+											
+						git pull		==> It will check for any incremental changes happened in remote repo.
+											If there is any changes available in remote repository it will updated the local repository as well as the working Directory.
+												
+							git pull 	==> git fetch + git Merge
+					
+
+					Application Program :::
+					
+						Functions 
+						
+							f1
+							f2
+							f3
+						
+						
+Next ::::
+
+			Installation of GIT Cli in local Machine::
+			
+			Create a github account ::: https://github.com/ ==> Remote git repository 
+			
+			
+						
+						
+						
+			
+			
