@@ -490,7 +490,7 @@ Next ::::
 			
 			
 #########################
-Day - 2 - 25th Oct. 2023
+Day - 3 - 26th Oct. 2023
 #########################						
 						
 						
@@ -621,9 +621,213 @@ Day - 2 - 25th Oct. 2023
 								--> Reset the HEAD pointer to the specific reset point
 									The changes will be removed from local repository, staging area as well as from working directory.	
 			
-			
+
+
+
+					Repo :
+					
+						master 
+						
+							c1
+							c2
+							c3
+							c4
+							c5
+							
+							
+						git reset --hard c3 
+
+							c1
+							c2
+							c3
+							
+							
 			
 			git revert 			<==> to git reset --hard
 					git revert will create a new commit point to track the changes.
 			
+#########################
+Day - 4 - 27th Oct. 2023
+#########################
+
+
+			git revert 			<==> 	to git reset --hard
+					git revert will create a new commit point to track the changes.
 			
+					It will undo the committed changes.
+					It will create new commit point for tracking.
+					Revert is recommended in the shared repositories.					
+					
+			git revert <commit> 
+			
+			
+			Git Branches ::::
+			
+				Distributed VCS :::
+				
+						- Parallel Development
+			
+			GIT Branches - 	are used to perform Parallel Development
+							used to maintain the integrity of master branch.
+							
+							
+				Repository :::
+					(default)master --> index.html ==> 5 functions - cm1,cm2,cm3 ==> Production copy.
+					
+			Git Branching Strategies/process/policies :: 
+			
+			
+Scenario 1 :
+
+			Repo:
+				master - cm1,cm2,cm3
+				
+					feature1 - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3 
+					feature2 - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3 
+					
+Scenario 2 :
+
+			Repo:
+				master 	- cm1,cm2,cm3
+						- cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3
+						
+					Developer1_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 
+						feature1 - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3 
+						feature2 - cm1,cm2,cm3,f2cm1,f2cm2,f2cm3 
+
+Scenario 3 :
+
+			Repo:
+				master 	- cm1,cm2,cm3
+						- cm1,cm2,cm3,Developer1_Changes,Developer2_Changes
+						
+
+					Integration_Branch - cm1,cm2,cm3,Developer1_Changes,Developer2_Changes
+						Developer1_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 
+							feature1 - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3 
+							feature2 - cm1,cm2,cm3,f2cm1,f2cm2,f2cm3 					
+						
+						Developer2_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 
+							feature1 - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3 
+							feature2 - cm1,cm2,cm3,f2cm1,f2cm2,f2cm3 					
+					
+Scenario 4 :
+
+			Repo:
+				master 	- cm1,cm2,cm3
+						- cm1,cm2,cm3,cm4									
+							
+					Release_Branch - cm1,cm2,cm3,Team1_Changes,Team2_Changes
+					
+						Integration_Branch - cm1,cm2,cm3,Developer1_Changes,Developer2_Changes					Team1
+							Developer1_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 
+								feature1 - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3 
+								feature2 - cm1,cm2,cm3,f2cm1,f2cm2,f2cm3 					
+							
+							Developer2_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 
+								feature1 - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3 
+								feature2 - cm1,cm2,cm3,f2cm1,f2cm2,f2cm3 					
+
+						Integration_Branch - cm1,cm2,cm3,Developer1_Changes,Developer2_Changes					Team2
+							Developer1_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 
+								feature1 - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3 
+								feature2 - cm1,cm2,cm3,f2cm1,f2cm2,f2cm3 					
+							
+							Developer2_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 
+								feature1 - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3 
+								feature2 - cm1,cm2,cm3,f2cm1,f2cm2,f2cm3 		
+								
+								
+		
+			Create Branch :::
+			
+				git branch 					== List of Branches in repo
+				
+				git branch <branch_name>
+				
+				git switch -c <branch_name>
+				
+				git checkout -b <branch_name>
+				
+				
+			repo :
+			
+				master - cm1,cm2,cm3
+				
+					feature1 - cm1,cm2,cm3,f1cm1	==> once changes are ready,
+					
+					git switch master 				==> switch to target branch 
+					
+					git merge feature1 				==> merge command shd be executed only from target branch
+					
+					
+					
+				Why the Merge Conflict Occurs ?
+				
+					When more than one feature try to update same file and record in the target branch will get merge conflict.
+				
+				How to resolve Merge Conflict ?
+				
+					- Identify the file(s) that is causing the merge conflict
+					- Open that file and review the changes 
+					- Decide which changes has to retained / removed.
+					- Update the content of the file accordingly, also remove all the unwanted header and footer created during conflict
+					- perform git add and commit on the target branch.
+					
+					
+				--> Prevent the Merge - Conflict!!!
+				
+					Review the changes before merge.
+					
+					
+			git rebase ::: => 	used to prevent merge conflict in target branch and keep you current branch in sync with target branch.
+								Maintains Linear commits
+			
+								It is always recommended to use rebase before any merge.
+			
+			
+				Repo
+					master 	- cm1,cm2,cm3 
+							- cm1,cm2,cm3,f1mc1,f1cm2				# upon merging feature1
+							- cm1,cm2,cm3,f1mc1,f1cm2,f2cm1,f2cm2   # upon merging feature2 with proper rebase.
+						
+						feature1 - cm1,cm2,cm3,f1mc1,f1cm2
+						
+						feature2 - cm1,cm2,cm3,f2cm1,f2cm2
+						
+							git rebase master 						# Shd be executed from the current branch.
+									
+									- cm1,cm2,cm3,f1mc1,f1cm2,f2cm1,f2cm2
+							
+							git switch master 
+							
+							git merge feature2
+							
+							
+				Repo
+					master 	- cm1,cm2,cm3 
+							- cm1,cm2,cm3,f1mc1,f1cm2			# upon merging feature1
+							
+							- cm1,cm2,cm3,f2cm1,f2cm2,f1mc1,f1cm2  # upon merging feature2 without rebase
+
+						
+						feature1 - cm1,cm2,cm3,f1mc1,f1cm2
+								
+								git switch master 
+								
+								git merge feature1 == ? 
+						
+						feature2 - cm1,cm2,cm3,f2cm1,f2cm2
+						
+								git switch master 
+								
+								git merge feature2					
+
+
+Next ::
+
+		squash
+		stash 
+		handling remote repos.
+		
+		Jenkins 
