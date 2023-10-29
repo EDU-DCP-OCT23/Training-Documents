@@ -821,6 +821,404 @@ Scenario 4 :
 								
 								git merge feature2					
 
+  104  git --version
+  105  pwd
+  106  cd e:
+  107  clear
+  108  cd c:
+  109  cd e:
+  110  pwd
+  111  mkdir DCP-OCt23
+  112  cd DCP-OCt23/
+  113  pwd
+  114  mkdir testrepo1
+  115  cd testrepo1/
+  116  clear
+  117  pwd
+  118  cd ..
+  119  ls
+  120  mkdir testrepo2
+  121  ls
+  122  clear
+  123  cd testrepo1/
+  124  pwd
+  125  pwd
+  126  clear
+  127  pwd
+  128  clear
+  129  ls
+  130  ls -a
+  131  git init
+  132  ls
+  133  ls -a
+  134  cd .git/
+  135  ls
+  136  clear
+  137  cd ..
+  138  ls
+  139  cd ..
+  140  ls
+  141  cd testrepo2/
+  142  git init
+  143  ls -a
+  144  cd ..
+  145  clear
+  146  cd testrepo
+  147  cd testrepo1/
+  148  ls
+  149  clear
+  150  echo "Hello"
+  151  echo "Hello" >> file1.txt
+  152  ls
+  153  cat  file1.txt
+  154  git status
+  155  git add file1.txt
+  156  git status
+  157  git commit -m "Created file1.txt"
+  158  git log
+  159  clear
+  160  ls
+  161  echo "rec1" >> file2.txt
+  162  git status
+  163  git add file2.txt
+  164  git status
+  165  git commit -m "created file2.txt"
+  166  git log
+  167  git config user.name "LoksaiETA"
+  168  echo "rec" >> f1.txt
+  169  git add f1.txt
+  170  git commit -m "created f1.txt"
+  171  git log
+  172  cd ..
+  173  cd testrepo2
+  174  git status
+  175  echo "rec1" >> f1.txt
+  176  git add f1.txt
+  177  git status
+  178  git commit -m "created f1.txt"
+  179  git log
+  180  git status
+  181  clear
+  182  ls
+  183  git status
+  184  echo "rec1" >> f2.txt
+  185  git status
+  186  git add f2.txt
+  187  clear
+  188  git status
+  189  git commit -m "created f2.txt"
+  190  git status
+  191  clear
+  192  ls
+  193  echo "rec1" >> f3.txt
+  194  git status
+  195  echo "rec1" >> f4.txt
+  196  echo "rec1" >> f5.txt
+  197  echo "rec1" >> s1.java
+  198  echo "rec1" >> s2.java
+  199  echo "rec1" >> a1.md
+  200  echo "rec1" >> a2.doc
+  201  git status
+  202  git add a1.md a2.doc
+  203  git status
+  204  git add *.java
+  205  git status
+  206  git add .
+  207  git status
+  208  git commit -m "Created files"
+  209  git log
+  210  git log --oneline
+  211  clear
+  212  git log --oneline
+  213  git log -2
+  214  git log -1
+  215  git log --oneline -2
+  216  git log --stat
+  217  git log --stat -1
+  218  clear
+  219  git log --oneline
+  220  git show d0034be
+  221  clear
+  222  git log --oneline
+  223  git show e2f6a3d
+  224  clear
+  225  cd .git/
+  226  ls
+  227  clear
+  228  cd ..
+  229  ls
+  230  git status
+  231  git log --oneline
+  232  echo "rec1" >> w1.txt
+  233  git add .
+  234  clear
+  235  git status
+  236  ls
+  237  git rm --cached w1.txt
+  238  git status
+  239  git add .
+  240  git status
+  241  git rm -f w1.txt
+  242  git status
+  243  ls
+  244  clear
+  245  ls
+  246  cat s2.java
+  247  git status
+  248  echo "rec2" >> s2.java
+  249  git status
+  250  git diff
+  251  git add .
+  252  git commit -m "Updated S2.java"
+  253  clear
+  254  git log
+  255  clear
+  256  clear
+  257  cd ..
+  258  mkdir myproj1
+  259  cd myproj1/
+  260  clear
+  261  git init
+  262  echo "rec1" >> f1.txt
+  263  git add .
+  264  git commit -m "CM1"
+  265  echo "rec1" >> f2.txt
+  266  git add .
+  267  git commit -m "CM2"
+  268  echo "rec1" >> f3.txt
+  269  git add .
+  270  git commit -m "CM3"
+  271  echo "rec1" >> f4.txt
+  272  git add .
+  273  git commit -m "CM4"
+  274  echo "rec1" >> f5.txt
+  275  git add .
+  276  git commit -m "CM5"
+  277  clear
+  278  git log --oneline
+  279  ls
+  280  git ls-files
+  281  git reset --soft b633a5b
+  282  git status
+  283  ls
+  284  git ls-files
+  285  git log --oneline
+  286  git commit -m "CM5.1"
+  287  git log --oneline
+  288  git status
+  289  git log --oneline
+  290  git reset --mixed b633a5b
+  291  git status
+  292  ls
+  293  git ls-files
+  294  git add .
+  295  git commit -m "CM5.2"
+  296  git log --oneline
+  297  ls
+  298  git ls-files
+  299  git reset --hard b633a5b
+  300  git status
+  301  ls
+  302  git ls-files
+  303  git log --oneline
+  304  git reset --hard 2144832
+  305  git status
+  306  ls
+  307  git ls-files
+  308  git log --oneline
+  309  git log
+  310  ls
+  311  cat f1.txt
+  312  echo "rec2" >> f1.txt
+  313  ls
+  314  cat f1.txt
+  315  git status
+  316  git add .
+  317  git commit -m "updated f1.txt"
+  318  ls
+  319  git log --oneline
+  320  clear
+  321  cd ..
+  322  mkdir samplerepo1
+  323  cd samplerepo1/
+  324  clear
+  325  git init
+  326  echo "rec1" >> f1.txt
+  327  git add .
+  328  git commit "CM1"
+  329  git commit -m "CM1"
+  330  echo "rec1" >> f2.txt
+  331  git add .
+  332  git commit -m "CM2"
+  333  echo "rec1" >> f3.txt
+  334  git add .
+  335  git commit -m "CM3"
+  336  echo "rec1" >> f4.txt
+  337  git add .
+  338  git commit -m "CM4"
+  339  clear
+  340  git log --oneline
+  341  ls
+  342  git revert 43856a6
+  343  git log --oneline
+  344  clear
+  345  git log --oneline
+  346  ls
+  347  git show 43856a6
+  348  ls
+  349  git show 753e26f
+  350  clear
+  351  git log --oneline
+  352  git revert 753e26f
+  353  git log --oneline
+  354  ls
+  355  ls -a
+  356  cd .git/
+  357  ls
+  358  clear
+  359  cd ..
+  360  ls
+  361  cd ..
+  362  clear
+  363  mkdir.exe samplerepo2
+  364  clear
+  365  ls
+  366  cd samplerepo2/
+  367  ls
+  368  clear
+  369  git init
+  370  echo "rec1" >> s1.txt
+  371  git add .
+  372  git commit -m "cm1 from master"
+  373  echo "rec1" >> s2.txt
+  374  git add .
+  375  git commit -m "cm2 from master"
+  376  clear
+  377  git log --oneline
+  378  git branch
+  379  git switch -c feature1
+  380  git branch
+  381  git switch master
+  382  git branch
+  383  git branch feature2
+  384  git checkout -b feature3
+  385  git branch
+  386  clear
+  387  git switch master
+  388  git log --oneline
+  389  git switch feature1
+  390  git log --oneline
+  391  ls
+  392  echo "rec1" >> q1.txt
+  393  git add .
+  394  git commit -m "cm1 from feature1"
+  395  git log --oneline
+  396  ls
+  397  git switch master
+  398  ls
+  399  git log --oneline
+  400  git merge feature1
+  401  ls
+  402  git log --oneline
+  403  clear
+  404  ls
+  405  git log --oneline
+  406  git branch rel1feature
+  407  git branch rel2feature
+  408  clear
+  409  git log --oneline
+  410  git switch rel1feature
+  411  ls
+  412  cat q1.txt
+  413  echo "rec1 from rel1feature" >> q1.txt
+  414  cat q1.txt
+  415  git add .
+  416  git commit -m "cm1 from rel1feature"
+  417  git log
+  418  clear
+  419  git log --oneline
+  420  ls
+  421  cat q1.txt
+  422  git switch master
+  423  ls
+  424  cat q1.txt
+  425  git switch rel2feature
+  426  ls
+  427  cat q1.txt
+  428  echo "Rec2 from rel2feature" >> q1.txt
+  429  git add .
+  430  git commit -m "cm1 from rel2feature"
+  431  clear
+  432  cat q1.txt
+  433  git switch rel1feature
+  434  ls
+  435  cat q1.txt
+  436  git switch master
+  437  cat q1.txt
+  438  git merge rel1feature
+  439  cat q1.txt
+  440  git log --oneline
+  441  git merge rel2feature
+  442  vi q1.txt
+  443  cat q1.txt
+  444  git add .
+  445  git commit -m "resloved merge conflict"
+  446  git log --oneline
+  447  la
+  448  ls
+  449  cat q1.txt
+  450  clear
+  451  ls
+  452  git log --oneline
+  453  cd ..
+  454  mkdir samplerepo4
+  455  cd samplerepo4
+  456  clear
+  457  git init
+  458  echo "rec" >> f1.txt
+  459  git add .
+  460  git commit -m "CM1"
+  461  clear
+  462  git branch feature1
+  463  git branch feature2
+  464  git branch
+  465  git switch feature1
+  466  git log --oneline
+  467  ls
+  468  echo "rec1" >> s1.txt
+  469  git add .
+  470  git commit -m "f1cm1"
+  471  echo "rec1" >> s2.txt
+  472  git add .
+  473  git commit -m "f1cm2"
+  474  git log --oneline
+  475  git rebase master
+  476  git switch master
+  477  git merge feature1
+  478  ls
+  479  git log --oneline
+  480  git switch feature2
+  481  ls
+  482  echo "rec1" >> w1.txt
+  483  git add .
+  484  git commit -m "f2cm1"
+  485  echo "rec1" >> w2.txt
+  486  git add .
+  487  git commit -m "f2cm2"
+  488  echo "rec1" >> w3.txt
+  489  git add .
+  490  git commit -m "f2cm3"
+  491  git log --oneline
+  492  ls
+  493  git rebase master
+  494  ls
+  495  git log --oneline
+  496  git switch master
+  497  git log --oneline
+  498  ls
+  499  git merge feature2
+  500  ls
+  501  history
 
 Next ::
 
