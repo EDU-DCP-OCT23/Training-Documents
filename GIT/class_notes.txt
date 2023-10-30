@@ -1224,3 +1224,359 @@ Next ::
 		handling remote repos.
 		
 		Jenkins 
+#########################
+Day - 5 - 30th Oct. 2023
+#########################
+
+
+		squash
+		stash 
+		handling remote repos.
+		
+		
+		git sqash :::		It is used to combined more than one commit and created one new commit point.
+
+		
+		master 	--> cm1,cm2,cm3,cm4
+				--> cm1,cm2,cm3,cm4,f1cm1,2,3,4,5,6,7,8,9,.............,n			# upon merge 
+		
+			feature1 --> cm1,cm2,cm3,cm4,f1cm1,2,3,4,5,6,7,8,9,.............,n
+			
+				git switch master 
+				git merge --squash feature1	==> 
+				new commit -> 
+	
+Scenario 4 :			with squash 
+
+			Repo:
+				master 	- cm1,cm2,cm3
+						- cm1,cm2,cm3,cm4								
+							
+					Release_Branch - cm1,cm2,cm3,Team1_Changes,Team2_Changes
+					
+						Integration_Branch - cm1,cm2,cm3,Developer1_Changes,Developer2_Changes					Team1
+							Developer1_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 
+								feature1 - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3 
+								feature2 - cm1,cm2,cm3,f2cm1,f2cm2,f2cm3 					
+							
+							Developer2_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 
+								feature1 - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3 
+								feature2 - cm1,cm2,cm3,f2cm1,f2cm2,f2cm3 					
+
+						Integration_Branch - cm1,cm2,cm3,Developer1_Changes,Developer2_Changes					Team2
+							Developer1_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 
+								feature1 - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3 
+								feature2 - cm1,cm2,cm3,f2cm1,f2cm2,f2cm3 					
+							
+							Developer2_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 
+								feature1 - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3 
+								feature2 - cm1,cm2,cm3,f2cm1,f2cm2,f2cm3 
+
+
+Scenario 4 :			without squash 
+
+			Repo:
+				master 	- cm1,cm2,cm3
+						- cm1,cm2,cm3,cm4								
+							
+					Release_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3,,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 	,,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3,,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 	
+					
+						Integration_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3,,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 				Team1
+							Developer1_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 
+								feature1 - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3 
+								feature2 - cm1,cm2,cm3,f2cm1,f2cm2,f2cm3 					
+							
+							Developer2_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 
+								feature1 - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3 
+								feature2 - cm1,cm2,cm3,f2cm1,f2cm2,f2cm3 					
+
+						Integration_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3,,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 					Team2
+							Developer1_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 
+								feature1 - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3 
+								feature2 - cm1,cm2,cm3,f2cm1,f2cm2,f2cm3 					
+							
+							Developer2_Branch - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 
+								feature1 - cm1,cm2,cm3,f1cm1,f1cm2,f1cm3 
+								feature2 - cm1,cm2,cm3,f2cm1,f2cm2,f2cm3 
+
+			
+			git cherry-pick <commit_id>								
+			git cherry-pick <team1_changes>
+			
+		
+		git Stash :::		-- It is used to store the uncommitted changes to a temp. area 
+		
+		
+			repo. 
+				master : cm1 
+				
+					feature1 : cm1,f1cm1
+					
+					feature2
+				
+					
+				git stash save "msg1"
+				
+				git stash list 
+				
+				git stash apply 	==> It bring the latest entry from stash list, back to staging area, but the latest entry remains in stash list.
+				
+				git stash pop		==> It bring the latest entry from stash list, back to staging area, but the latest entry will be removed from stash list.
+				
+				git stash drop 		==> Used to Drop/delete the latest entry from stash list
+				
+				git stash pop stash@{3}
+				git stash apply stash@{2}
+				git stash drop stash@{4}
+				
+				git stash clear 	==> Used to clean-up the stash list.
+				
+				git stash branch temp-feature1
+		
+		
+		Handling Remote Repository :::
+		
+			using git hub!
+		
+			
+					Developers' Workload ::::
+					
+						- Enhancement-project
+						- Bug-fixing 
+						
+						- New Project
+						
+						
+						
+					
+					Git Workflow:: ***
+					
+					
+					Local Machine																					Remote Server
+					
+					Working Directory 		--> Staging/Index Area		--> 		Local Repository 		-->			Remote Repository
+					index.jsp						index.jsp							index.jsp_v1.0							index.jsp_v1.0
+									--------->						-----------> 						---------->	
+									git add 						git commit							git push
+					
+					
+					fork				==> Used to copy a Remote Repository to another remote repository
+					
+					git clone 			==> Used to copy/clone the entire repository from Remote Repository to Local Machine
+					
+					git add 			==> Used to add the changes from Working Dir. to Staging Area
+					
+					git commit 			==> Used to Commit the changes from staging area to Local Repository 
+					
+					git push 			==> Used to push the changes from Local Repository to Remote Repository 					
+
+					
+					git fetch/pull :: 	==> Both git fetch & git pull are used to handle the incremental Changes.
+					
+						git fetch		==> It is just to check for any incremental changes happened in remote repo.
+											If there is any changes available in remote repository it will updated only in the local repository. It will never update the changes in working Directory.
+											
+											later we can use merge/checkout command to bring the changes to from local repository to working dir.
+											
+						git pull		==> It will check for any incremental changes happened in remote repo.
+											If there is any changes available in remote repository it will updated the local repository as well as the working Directory.
+												
+							git pull 	==> git fetch + git Merge
+			
+				git clone https://github.com/EDU-DCP-OCT23/testrepo1.git
+				
+				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
+			
+			
+			
+				git branch -M master		-- branch rename :::
+
+				git remote -v	-- used to get the list of remote repos linked to my local repo. 
+
+				git remote add  -- used to link a new remote repo to local repo 
+				
+					git remote add origin https://github.com/EDU-DCP-OCT23/testrepo2.git
+				
+				git remote remove  -- used to remove the remote repo from local repo.
+				
+					git remote remove origin
+				
+
+  501  cd e:
+  502  cd DCP-OCt23/
+  503  ls
+  504  ls
+  505  mkdir project1
+  506  cd project1/
+  507  clear
+  508  git init
+  509  git status
+  510  ls
+  511  echo "rec1" >> s1.txt
+  512  git add .
+  513  git commit -m "rel1"
+  514  clear
+  515  git log --oneline
+  516  git switch -c feature1
+  517  echo "rec1" >> q1.txt
+  518  git add .
+  519  git commit -m "f1cm1"
+  520  ls
+  521  echo "rec1" >> q2.txt
+  522  git add .
+  523  git commit -m "f1cm2"
+  524  echo "rec1" >> q3.txt
+  525  git add .
+  526  git commit -m "f1cm3"
+  527  echo "rec1" >> q4.txt
+  528  git add .
+  529  git commit -m "f1cm4"
+  530  echo "rec1" >> q5.txt
+  531  git add .
+  532  git commit -m "f1cm5"
+  533  clear
+  534  ls
+  535  git log --oneline
+  536  git switch master
+  537  git log --oneline
+  538  git merge --squash feature1
+  539  git status
+  540  git commit -m "rel2"
+  541  git log --oneline
+  542  ls
+  543  clear
+  544  cd ..
+  545  mkdir project2
+  546  cd project2
+  547  clear
+  548  git init
+  549  echo "rec1" >> f1.txt
+  550  git add .
+  551  git commit -m "cm1"
+  552  clear
+  553  git switch -c feature1
+  554  ls
+  555  git log -oneline
+  556  git log --oneline
+  557  echo "rec1" >> s1.txt
+  558  clear
+  559  git status
+  560  git add .
+  561  git switch master
+  562  git status
+  563  git switch feature1
+  564  git status
+  565  git stash save "stashed s1.txt"
+  566  git status
+  567  ls
+  568  git stash list
+  569  echo "rec1" >> w2.txt
+  570  git add .
+  571  git status
+  572  git stash save "stashed w2.txt"
+  573  git stash list
+  574  git status
+  575  ehco "rec1" >> e1.txt
+  576  git add .
+  577  git stash save "stashed e1.txt"
+  578  git stash list
+  579  ls
+  580  git status
+  581  git stash apply
+  582  ls
+  583  git stash list
+  584  git commit -m "created e1"
+  585  git status
+  586  ls
+  587  git stash list
+  588  git stash drop
+  589  git stash list
+  590  echo "rec1" >> r1.txt
+  591  git add .
+  592  git stash save "Stashed r1.txt"
+  593  echo "rec1" >> r2.txt
+  594  git add .
+  595  git stash save "Stashed r2.txt"
+  596  echo "rec1" >> r3.txt
+  597  git add .
+  598  git stash save "Stashed r3.txt"
+  599  git stash list
+  600  git status
+  601  ls
+  602  git stash pop stash@{3}
+  603  git stash list
+  604  git stash clean
+  605  git stash clear
+  606  git stash list
+  607  clear
+  608  git status
+  609  git stash save "w2.txt"
+  610  git status
+  611  ls
+  612  git stash list
+  613  git stash branch temp-feature1
+  614  ls
+  615  git status
+  616  git commit -m "w2.txt"
+  617  git status
+  618  git branch
+  619  clear
+  620  cd ..
+  621  mkdir remoterepos
+  622  cd remoterepos/
+  623  git clone https://github.com/EDU-DCP-OCT23/testrepo1.git
+  624  ls
+  625  cd testrepo1/
+  626  ls
+  627  git branch
+  628  git status
+  629  git remote -v
+  630  git switch -c localfeature1
+  631  ls
+  632  echo "rec1" >> localfile1.txt
+  633  git add .
+  634  git commit -m "CM1 from local feature1"
+  635  git push -u origin localfeature1
+  636  clear
+  637  git status
+  638  git switch main
+  639  git status
+  640  git log --oneline
+  641  ls
+  642  git fetch
+  643  ls
+  644  git pull
+  645  ls
+  646  git log --oneline
+  647  clear
+  648  clear
+  649  clear
+  650  ls
+  651  git pull
+  652  ls
+  653  clear
+  654  cd ..
+  655  clear
+  656  mkdir repo1
+  657  cd repo1/
+  658  git init
+  659  echo "rec1" >> f1.txt
+  660  git add .
+  661  git commit -m "cm1"
+  662  cler
+  663  clear
+  664  git remote -v
+  665  git remote add origin https://github.com/EDU-DCP-OCT23/testrepo2.git
+  666  git remote -v
+  667  git branch -M main
+  668  git branch -M master
+  669  git push -u origin master
+  670  git remote -v
+  671  git remote remove origin
+  672  git remote -v
+  673  clear
+  674  history
+				
+Next :: 
+		
+			Build Orchestration Tool  using Jenkins.
