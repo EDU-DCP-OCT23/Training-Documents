@@ -1309,7 +1309,162 @@ sudo apt-get install jenkins -y
 					10 VMs 	==> 75 Hrs/Month 
 		
 			
+		
+#########################
+Day - 7 - 1st Nov. 2023
+#########################			
 			
+				Jenkins Dashboard ::
+			
+			
+			Jenkins Jobs/Projects :::
+			
+				Free Style Project --> Created using Manual Configurations  
+				
+				Pipeline Project  --> Created using groovy scripts to automate any task 
+				
+				
+			Handling Variables ::::
+			
+				- Environment Variables
+				
+				- User-Defined Variables
+			
+			
+			
+			Pipeline Projects :::
+			
+				Automated Build and Deployment :::
+				
+			Source Code :
+			
+			Build & Deploy
+			
+			Node should be installed with required build tools 
+			
+			Deployment Server(Target server) 
+			
+			Pipelines are composed of various stages ::
+			
+			SCM_Checkout  --> 	Build 	--> 	Deployment
+			
+			
+			Configure the Slave Node to perform build.
+			
+			Java Web Application - created using Maven.
+			
+				- Launch a VM for slaveNode.
+				- Install all the required tools for build --> git, jdk, maven
+				
+				- Deploy to target server.
+				
+				
+			Connect to remote server using SSH :
+			
+				- Create VM 
+				- Create a valid UserID/Name
+				- Create Credential for this user.
+						- Password based Auth.
+						- Token based Auth.
+						- Key based Auth. 
+						- Passwordless Auth.
+			
+			
+			Build Activities :::: 
+			
+				Java_Web_Application -->
+				
+					Build tools like Maven/Gradle/Ant
+					
+					Maven --> 
+					
+						- pom.xml  ==> It is used to define all the dependencies and plugins that are required for maven to build the application.
+						- maven goal	==> Defined the objective - clean,test,build,package,compile
+						
+						maven goal - package ==> used to compile, test and create artifacts
+						
+					
+					
+- Installation and Configuration of Jenkins : https://www.jenkins.io/doc/book/installing/
+
+#Install JDK :		
+			
+sudo -i
+
+sudo apt-get update -y
+sudo apt-get install openjdk-11-jre -y
+java -version	
+
+
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update -y
+sudo apt-get install jenkins -y
+					
+		Jenkins run in Port 8080 - default port for Jenkins
+		
+		<public_ip>:8080 to access jenkins thru any web browser					
+			
+Configure Slave Node1 for Java Maven App. :
+
+Install Java ::
+
+sudo -i
+sudo apt update -y 
+sudo apt install openjdk-11-jre -y
+java -version
+
+Install GIT :
+
+sudo apt install git -y
+
+Install Maven - Build Tool :
+https://maven.apache.org/install.html
+
+sudo apt install maven -y 
+mvn --version
+
+
+Create User in Jenkins Slave Machine & Create SSH Keys 
+
+	SSH Keys --> is composed of public and private keys 
+
+
+#Add User : 
+
+#useradd -m -d /home/devopsadmin devopsadmin
+#useradd devopsadmin
+
+useradd devopsadmin -s /bin/bash -m -d /home/devopsadmin
+
+su - devopsadmin
+
+#ssh-keygen
+
+#for Ubuntu ::
+ssh-keygen -t rsa -b 4096 -m PEM
+
+
+ls ~/.ssh 
+
+#You should see following two files:
+
+#id_rsa - private key
+#id_rsa.pub - public
+
+
+cat id_rsa.pub > authorized_keys
+
+chown -R devopsadmin /home/devopsadmin/.ssh
+chmod 600 /home/devopsadmin/.ssh/authorized_keys
+chmod 700 /home/devopsadmin/.ssh
+
+NEXT :::
+	In Jenkins Master - Add Node Configuration	
+		Goto Manage Jenkins - Add New Node Configuration			
 		
 			
 			
