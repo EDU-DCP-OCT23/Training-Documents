@@ -1466,8 +1466,180 @@ NEXT :::
 	In Jenkins Master - Add Node Configuration	
 		Goto Manage Jenkins - Add New Node Configuration			
 		
+
+			
+#########################
+Day - 8 - 2nd Nov. 2023
+#########################			
+
+
+	In Jenkins Master - Add Node Configuration
+		
+		Goto Manage Jenkins - Add New Node Configuration
+		
+
+			Pipelines are composed of various stages ::
+			
+			SCM_Checkout  --> 	Build 	--> 	Deployment to QA_Server ==> Automate_QA_Testing 
 			
 			
+			Pipelines :::
+
+	
+				Scripted Pipelines
+					
+				Declarative Pipelines
+
+pipeline {
+    agent { label 'slave1' }
+
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Perform SCM Checkout'
+				git 'https://github.com/LoksaiETA/Java-mvn-app2.git'				
+            }
+        }
+        stage('Java Application Build') {
+            steps {
+                echo 'Perform Java Maven Application Build'
+				sh 'mvn -Dmaven.test.failure.ignore=true clean package'				
+            }
+        }
+        stage('Deploy to QA Server') {
+            steps {
+				script {
+                    sshPublisher(publishers: [sshPublisherDesc(configName: 'Tomcat-Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/mvn-hello-world.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+				}
+            }
+        }
+    }
+}
+
+		Environments ::;
+		
+			Non-Prod 																			Prod 
+			
+				DEV 
+				Test 
+					QA 
+					UAT											>>>>>>								Prod Envi. 
+					
+					
+			Target Environment :::
+			
+				QA_Server (VM) --> Target server / Hosted server 			-- Hardware 
+					Web Application Server ::: Tomcat / Nginx 				-- Software
+					
+					
+			Launch a VM for QA_Server ::
+			
+				Install Tomcat :
+					- jdk 
+					- Tomcat				==> runs in port 8080.
+			
+			Create Linux User 
+			Create SSH Keys to that user.
+			That user should have access to Tomcat.
+			Attach Tomcat Server to Jenkins Master.
+			
+				Deployment ::::		It is just a process of copying the artifact from source to target server 
+				
+				Source Machine															Target Machine:
+				
+					Jenkins_Slave															Tomcat_Server 
+						Soure file.: target/mvn-hello-world.war									target dir.: /opt/tomcat/webapps
+				
+						Soure file.: target/mvn-hello-world.war									target dir.: /opt/tomcat/webapps/mvn-hello-world.war	
+
+
+						
+			Connect any Remote server to Jenkins Master to copy artifacts :
+					Publish over SSH Plugins 
+					
+
+
+Next :
+		Test Application in QA_Server
+		Automate Builds using Build Triggers 
+		Email Notification
+		
+######################Install TOMCAT Application Server on Ubuntu :::
+
+sudo -i
+sudo apt update
+sudo apt install openjdk-11-jre -y 
+java -version
+
+#edit /etc/profile & add JAVA_HOME
+
+#/usr/lib/jvm/java-11-openjdk-amd64/
+
+vi /etc/profile
+
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
+
+source /etc/profile
+
+Install Tomcat ::  https://tomcat.apache.org/download-80.cgi
+
+https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.95/bin/apache-tomcat-8.5.95.tar.gz
+
+devopsadmin
+#https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.91/bin/apache-tomcat-8.5.91.tar.gz
+
+cd /opt
+wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.95/bin/apache-tomcat-8.5.95.tar.gz
+
+tar -xvzf /opt/apache-tomcat-8.5.95.tar.gz
+
+mv apache-tomcat-8.5.95 tomcat
+
+#Start Tomcat Server:
+#Goto:
+
+cd /opt/tomcat/bin
+./startup.sh
+
+###########################################
+
+#Add User : 
+
+#useradd -m -d /home/devopsadmin devopsadmin
+#useradd devopsadmin
+
+useradd devopsadmin -s /bin/bash -m -d /home/devopsadmin
+
+su - devopsadmin
+
+#ssh-keygen
+
+#for Ubuntu ::
+ssh-keygen -t rsa -b 2048 -m PEM
+
+
+ls ~/.ssh 
+
+#You should see following two files:
+
+#id_rsa - private key
+#id_rsa.pub - public
+
+
+cat id_rsa.pub > authorized_keys
+
+chown -R devopsadmin /home/devopsadmin/.ssh
+chmod 600 /home/devopsadmin/.ssh/authorized_keys
+chmod 700 /home/devopsadmin/.ssh
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#make devopsadmin user as a owner to tomcat dir :
+
+chown -R devopsadmin /opt/tomcat
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 			
 			
 			
