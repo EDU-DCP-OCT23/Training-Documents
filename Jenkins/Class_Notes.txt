@@ -1640,6 +1640,331 @@ chown -R devopsadmin /opt/tomcat
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+
+#########################
+Day - 9 - 3rd Nov. 2023
+#########################	
+
+		Execute Application in QA_Server
+		Automate Builds using Build Triggers 
+		Email Notification
+		Best Practises 
+		
+		IAC Tool - Ansible 
+
+		Execute Application in QA_Server
+		
+			<public_Ip>:8080/mvn-hello-world 
 			
+		
+		Automate Builds using Build Triggers :::
+
+			Build Triggers :::
+			
+				-- Build Periodic 
+				
+				-- Github Webhook 
+				
+				-- Poll SCM
+
+
+				-- Build Periodic 
+				
+						-- It is used to schedule the jobs based on crontab.
+						-- Irrespective of Source Change, the jenkins job gets triggered using crontab expression.
+						
+
+					Environments ::;
+					
+						Non-Prod 																			Prod 
+						
+							DEV 
+							Build
+							Test 
+								QA 
+								UAT											>>>>>>								Prod Envi. 
+
+
+						8AM start all the non-prod servers... 
+						10PM down all the non-prod servers... 
+						
+					Backup of my slave nodes Jenkins Jobs/Workspace, Volume snapshot...
+			
+
+				-- Github Webhook & Poll SCM:
+				
+						-- Both are based upon the source code changes.
+						-- GIT has be installed in Jenkins Master.
+					
+					-- Github Webhook:
+							-- It is used to trigger the jenkins whenever the user commit the changes in source code repository. 
+							-- Webhook has to be configured in github repository.
+					
+					Goto Repo level settings
+					
+					select webhook --> Add webhook
+					
+					http://13.232.187.76:8080/github-webhook/
+					
+					
+					http://13.127.140.36:8080/github-webhook/
+					
+					<jenkins_Master_Publie_IP_Addr>:8080/github-webhook/
+					
+					
+					
+					-- Poll SCM:
+							-- It is used to trigger the jenkins job based upon the crontab, only if there is any commit happened in the repo. during that specific time period.
+							
+						Test Cycle/Window :::
+							
+						8AM,12Noon,3PM ==> 
+						
+						
+						src_code repo ==> commit event --> As soon as we make any commit in this repo --> to trigger a job, -- github webhook
+					
+						src_code repo ==> commit event --> Once it reaches the schedule and only if there is any commit in this repo --> to trigger a job, -- poll scm		 8AM  			
+					
+					
+			Email Notification	:::
+			
+				Pre-requisites ::
+				
+					Active EMail ID 
+					Gmail_Id
+						User_Name : EMail_ID 
+						Password  : App-Password ( Token based Auth.)
+									- MFA - Enter ur active Mobile# -- Verify your Mobile#.
+									- Create App Password.
+									
+						Steps to create App-Password :
+							Login to Gmail Account 
+							Click on Manage Account 
+							@Left panel --> Security 
+								In Security Panel 
+									Enable MFA
+									on the same page in the search bar, search for app password
+									- Just give the name of app-password
+											we get - 16 Bytes of App-Password / Token for Auth.
+						
+
+				In Jenkins Email Notifications ::
+				
+					SMTP Server :
+						smtp.gmail.com
+
+					SMTP Authentication: 
+					
+					SMTP Port :: 465
+					
+					
+			Jenkins Upgrade 
+			Jenkins CleanUp 
+			Jenkins Backup & Recovery.
+			
+			Volume snapshot 
+					
+					
+					
+					
+					
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~					
+- Installation and Configuration of Jenkins : https://www.jenkins.io/doc/book/installing/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#Install JDK :		
+			
+sudo -i
+
+sudo apt-get update -y
+sudo apt-get install openjdk-11-jre -y
+java -version	
+
+
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update -y
+sudo apt-get install jenkins -y
+					
+		Jenkins run in Port 8080 - default port for Jenkins
+		
+		<public_ip>:8080 to access jenkins thru any web browser					
+			
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Configure Slave Node1 for Java Maven App. :
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Install Java ::
+
+sudo -i
+sudo apt update -y 
+sudo apt install openjdk-11-jre -y
+java -version
+
+Install GIT :
+
+sudo apt install git -y
+
+Install Maven - Build Tool :
+https://maven.apache.org/install.html
+
+sudo apt install maven -y 
+mvn --version
+
+
+Create User in Jenkins Slave Machine & Create SSH Keys 
+
+	SSH Keys --> is composed of public and private keys 
+
+
+#Add User : 
+
+#useradd -m -d /home/devopsadmin devopsadmin
+#useradd devopsadmin
+
+useradd devopsadmin -s /bin/bash -m -d /home/devopsadmin
+
+su - devopsadmin
+
+#ssh-keygen
+
+#for Ubuntu ::
+ssh-keygen -t rsa -b 4096 -m PEM
+
+
+ls ~/.ssh 
+
+#You should see following two files:
+
+#id_rsa - private key
+#id_rsa.pub - public
+
+
+cat id_rsa.pub > authorized_keys
+
+chown -R devopsadmin /home/devopsadmin/.ssh
+chmod 600 /home/devopsadmin/.ssh/authorized_keys
+chmod 700 /home/devopsadmin/.ssh
+
+
+In Jenkins Master - Add Node Configuration
+		
+		Goto Manage Jenkins - Add New Node Configuration
+
+							
+######################Install TOMCAT Application Server on Ubuntu :::
+
+sudo -i
+sudo apt update
+sudo apt install openjdk-11-jre -y 
+java -version
+
+#edit /etc/profile & add JAVA_HOME
+
+#/usr/lib/jvm/java-11-openjdk-amd64/
+
+vi /etc/profile
+
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
+
+source /etc/profile
+
+Install Tomcat ::  https://tomcat.apache.org/download-80.cgi
+
+https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.95/bin/apache-tomcat-8.5.95.tar.gz
+
+devopsadmin
+#https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.91/bin/apache-tomcat-8.5.91.tar.gz
+
+cd /opt
+wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.95/bin/apache-tomcat-8.5.95.tar.gz
+
+tar -xvzf /opt/apache-tomcat-8.5.95.tar.gz
+
+mv apache-tomcat-8.5.95 tomcat
+
+#Start Tomcat Server:
+#Goto:
+
+cd /opt/tomcat/bin
+./startup.sh
+
+###########################################
+
+#Add User : 
+
+#useradd -m -d /home/devopsadmin devopsadmin
+#useradd devopsadmin
+
+useradd devopsadmin -s /bin/bash -m -d /home/devopsadmin
+
+su - devopsadmin
+
+#ssh-keygen
+
+#for Ubuntu ::
+ssh-keygen -t rsa -b 2048 -m PEM
+
+
+ls ~/.ssh 
+
+#You should see following two files:
+
+#id_rsa - private key
+#id_rsa.pub - public
+
+
+cat id_rsa.pub > authorized_keys
+
+chown -R devopsadmin /home/devopsadmin/.ssh
+chmod 600 /home/devopsadmin/.ssh/authorized_keys
+chmod 700 /home/devopsadmin/.ssh
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#make devopsadmin user as a owner to tomcat dir :
+
+chown -R devopsadmin /opt/tomcat
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	-- Infra-Structure As Code - IAC Tools 
+	
+			Configuration Management using Ansible 
+			
+			Infra-Structure Provisioning using Terraform
+			
+			
+			Automate the Server Provisioning/Creating 				==> Terraform
+			
+			Automate the Server Configurations						==> Ansible 
+			
+			
+		Ansible :::
+		
+			-- Ansible Architecture 		--> Client/Server Architecture -- > Ansible Controller(Server) / Ansible Nodes
+			-- Working Model of Ansible
+					Ansible used Push Mechanism/
+					It pushes the required modules to perform any tasks. 
+					Ansible Is Agentless.
+					
+					
+			-- Ansible Architecture Component 
+					- Inventory 
+					- Modules 
+					- ansible.cfg 
+
+				 
+				 
+Next :::
+
+							
+			Installation of Ansible ::
+			
+				Python is a Pre-requisites.
+				
+				Working with Ansible....			
 			
 			
