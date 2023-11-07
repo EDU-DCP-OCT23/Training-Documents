@@ -1983,3 +1983,44 @@ Next ::
 			Ansible Roles 
 			
 			rm -rf .ssh 
+
+#########################
+Day - 11 - 7th Nov. 2023
+#########################
+
+			Ansible Modules 
+			
+			Ansible Adhoc Commands & Playbooks / Roles!
+			
+			- Ansible Playbooks 			==  Written using yaml scripts - Declarative Script 
+												Used to run some task in the target nodes, tasks are just the ansible modules
+												key : value pair 
+												
+												
+					Playbooks = should be reusable. 
+					
+		TasK 
+		
+			- install git 
+			
+		Task :
+		
+				install jdk 
+				
+				install tomcat 
+				
+				start tomcat 
+				
+		Handlers ==> used to control the flow of execution, if the current task is depend upon previous task. 
+			notify : <handler_name>
+			
+		Handlers also defines some set of tasks .
+		But it gets executed, only when it is invoked/notified.
+		
+		
+		
+		
+			
+					
+							 
+			
