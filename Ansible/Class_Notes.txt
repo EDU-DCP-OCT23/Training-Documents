@@ -2016,11 +2016,37 @@ Day - 11 - 7th Nov. 2023
 			
 		Handlers also defines some set of tasks .
 		But it gets executed, only when it is invoked/notified.
+
+#########################
+Day - 12 - 8th Nov. 2023
+#########################
 		
+		Working with Ansible Role / Handlers / Contitions....
 		
-		
-		
+		Ansible role ==> initialize in local machine 
 			
-					
-							 
+		Ansible Galaxy 
+		
+		
+---
+ - hosts: "{{ host_name }}"
+   become: yes
+   tasks:
+   - name: Manage "{{ tool_name }}" service
+     apt:
+       name: "{{ tool_name }}"
+       state: "{{ tool_state }}"	
+
+
+ansible-playbook install2.yaml -e "host_name=testnodes tool_name=git tool_state=present"
+
+
+Summary ::
+
+		Installation & config AC,ANodes 
+		Manage Ansible inventory file
+ 		Working with Adhoc commands/playbooks 
+		Ansible Roles 
+		
+
 			
