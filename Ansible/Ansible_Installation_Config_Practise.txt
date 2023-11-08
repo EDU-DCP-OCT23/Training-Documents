@@ -1,6 +1,6 @@
 Ansible Installation & Configurations:
 
-Launch 3 EC2 Instances... 1 for Ansible Controller & 2 as Nodes
+Launch 3 EC2 Instances... 1 for Ansible Controller & 2 as Nodes - ubuntu
 
 SSH connections :::
 
@@ -10,8 +10,6 @@ SSH connections :::
 #Add User in Ansible Nodes : 
 
 sudo -i
-
-apt update -y 
 
 useradd ansibleadmin -s /bin/bash -m -d /home/ansibleadmin 
 
@@ -29,19 +27,13 @@ vi /etc/ssh/sshd_config
 
 service sshd reload
 
-#As a root user edit below file:
-$ visudo
-
-#add the below mentioned line in the file and save it.
-ansibleadmin ALL=(ALL) NOPASSWD: ALL
-
 su - ansibleadmin
 
 ls -a 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#Login to Ansible Controller: https://docs.ansible.com/ansible/latest/installation_guide/index.html
+#Login to Ansible Controller:
 
 sudo -i
 
@@ -73,11 +65,11 @@ su - devopsadmin
 
 ssh-keygen -t rsa -b 1024 -m PEM
 
-ssh-copy-id ansibleadmin@172.31.34.167
-ssh-copy-id ansibleadmin@172.31.32.44
+ssh-copy-id ansibleadmin@172.31.42.186
+ssh-copy-id ansibleadmin@172.31.37.129
 
-ssh ansibleadmin@172.31.34.167
-ssh ansibleadmin@172.31.32.44
+ssh ansibleadmin@172.31.42.186
+ssh ansibleadmin@172.31.37.129
 
 chown -R devopsadmin:devopsadmin /etc/ansible
 
@@ -85,19 +77,8 @@ chown -R devopsadmin:devopsadmin /etc/ansible
 ###update vi etc/ansible/host
 
 [testnodes]
-samplenode1 ansible_ssh_host=172.31.34.167 ansible_ssh_user=ansibleadmin
-samplenode2 ansible_ssh_host=172.31.32.44 ansible_ssh_user=ansibleadmin
-
-[DEVTEAM]
-devnode1 ansible_ssh_host=172.31.34.167 ansible_ssh_user=ansibleadmin
-
-[SharedResources]
-devnode1222 ansible_ssh_host=172.31.34.167 ansible_ssh_user=ansibleadmin
-
-[TESTTEAM]
-samplenode2 ansible_ssh_host=172.31.34.167 ansible_ssh_user=ansibleadmin
-testnode2 ansible_ssh_host=172.31.32.44 ansible_ssh_user=ansibleadmin
-
+samplenode1 ansible_ssh_host=172.31.42.186 ansible_ssh_user=ansibleadmin
+samplenode2 ansible_ssh_host=172.31.37.129 ansible_ssh_user=ansibleadmin
 
 #**************************************************************************************************************************
 #hosts file is the default Inventory file for ansible 
@@ -154,8 +135,48 @@ ansible samplenode1 -m ping -i myinventoryfile.txt
 
 ansible samplenode2 -m ping
 
+ANSIBLE_KEEP_REMOTE_FILES=1 ansible samplenode1 -m shell -a "sleep 5 ; echo 'hi'"
+
+ANSIBLE_KEEP_REMOTE_FILES=1 ansible samplenode1 -m shell -a "uptime"
 
 ansible samplenode1 -m shell -a "sleep 5 ; echo 'hi'"
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ansible Facts!
+
+ansible samplenode1 -m setup
+ansible samplenode1 -m setup -a "filter=ansible_mounts"
+
+
+##Transfer a file from Ansible Controller to Nodes using copy Module
+
+ansible samplenode1 -m copy -a "src=/etc/ansible/file1.txt dest=/home/ansibleadmin"
+
+ansible samplenode1 -m copy -a "src=/etc/ansible/s1.txt dest=/home/ansibleadmin backup=yes"
+
+##Transfer a file from Ansible Nodes to Ansible Controller using fetch Module
+ansible samplenode1 -m fetch -a "src=/home/ansibleadmin/filefrom_AN1.txt dest=/home/devopsadmin"
+
+Ansible Playbooks :::
+
+*.yaml scripts 		==> Key-value pair
+
+- Playbook creation
+
+UseCase 1 :
+	- Deploy an artifact *.war from Jenkins Slave Machine to QA-Server.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+### List all modules:
+ansible-doc -l
+### No. of modules:
+ansible-doc -l | wc -l
+### Search for specific modules:
+ansible-doc -l | grep shel
+### To know about any specific modules:
+ansible-doc shell
+
 
 #**************************************************************************************************************************
 #Ansible Variables !
@@ -181,8 +202,30 @@ in yaml : "{{var1}}"
 	Execute :::
 	
 			ansible-playbook debugmod.yaml 
-			
-#**************************************************************************************************
+
+	debug :
+		msg 
+		var 
+
+
+
+
+var1
+
+echo $var1
+
+echo "${var1}"
+
+"{{var1}}"
+
+
+
+Handling the variables ::
+
+# How to jus verify playbook syntax:
+#ansible-playbook testfile.yaml --syntax-check
+
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~~~~~~~~~~~~~~~~~~~~~~~ test_var-datatype.yaml
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -200,8 +243,33 @@ in yaml : "{{var1}}"
        - "The value of x is: {{x}} and type: {{x|type_debug}}"
        - "THe value of my_num: {{my_num}} and type : {{my_num|type_debug}}"
        - "The value of my_name : {{my_name}} and type: {{my_name|type_debug}}"
-       - "The value of my_b is: {{my_b}} and type : {{my_b|type_debug}}"
+       - "THe value of my_b is: {{my_b}} and type : {{my_b|type_debug}}"
 
+
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#/etc/ansible/variables/myvarfile1.yaml
+    x: 23
+    my_num: 45.67
+    my_name: Loksai_ETA
+    my_b: YES
+
+#test_var-datatype1.yaml
+---
+ - hosts: samplenode1
+   vars_files:
+     - /etc/ansible/variables/myvarfile1.yaml
+   tasks:
+   - debug:
+      msg:
+       - "The value of x is: {{x}} and type: {{x|type_debug}}"
+       - "THe value of my_num: {{my_num}} and type : {{my_num|type_debug}}"
+       - "The value of my_name : {{my_name}} and type: {{my_name|type_debug}}"
+       - "THe value of my_b is: {{my_b}} and type : {{my_b|type_debug}}"
+
+
+ansible-playbook test_var-datatype1.yaml
 
 
 ---
@@ -214,15 +282,12 @@ in yaml : "{{var1}}"
        name: git
        state: present
 
-apt/yum/dnf ==> package management modules :
+ubuntu -- apt 
+centos/rhel -- yum 
 
-state : present / absent / latest 
-yum/apt ::
-
-state : present / absent / latest 
-yum install git 
-yum remove git 
-yum update git 
+	name :	to identify the package
+	
+	state : present/absent/latest
 
 
 
@@ -244,6 +309,39 @@ yum update git
 ansible-playbook install2.yaml -e "host_name=samplenode1 tool_name=git tool_state=present"
 
 
+Handling Variables :::
+
+	--> Hardcoding the variables --> vars:
+	--> Using Variables files    --> vars_files: 
+	--> Passing Extra values     --> -e 
+
+
+
+Handling Variables in Ansible :::
+
+	- Environment variables -- accessible using Setup Module.
+	
+	- Hardcoding the values in playbook 
+		using vars :
+	
+	- Using External Variable files :
+		using var_files
+
+	- Using -e to pass the values at run time.
+
+
+#install3.yaml
+---
+ - hosts: "{{ host_name }}"
+   become: yes
+   tasks:
+   - name: Manage "{{ tool_name }}" service
+     "{{Module_name}}":
+       name: "{{ tool_name }}"
+       state: "{{ tool_state }}"
+
+	  
+ansible-playbook inst3.yaml -e "host_name=samplenode1 tool_name=git tool_state=present"
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~~~~~~~~~~~~~~~~~~~~~~~ register and set-facts
@@ -278,6 +376,41 @@ ansible-playbook install2.yaml -e "host_name=samplenode1 tool_name=git tool_stat
       my_value: "bash version"
    - debug: var=bash_version
    
+
+yum ==> 
+
+	state : present/absent/latest 
+	
+service ==>
+
+	state : started/stopped/restart
+
+
+Using When Contidion :::
+
+---
+  - hosts: samplenode1
+    #gather_facts: false
+    become: yes
+    tasks:
+      - name: Install-nginx on Debian
+        apt:
+          name: nginx
+          state: "{{pkg_state}}"
+        when: ansible_os_family == "Debian"
+      - name: Install-nginx on Redhat
+        apt:
+          name: nginx
+          state: "{{pkg_state}}"
+        when: ansible_os_family == "RedHat"
+
+
+		  
+Handlers --> are used to controll the flow of playbook execution, based on the previous modules
+		This can be done thru notify key.
+
+		Handlers are same as tasks.
+
 Handlers :::
 
 ---
@@ -296,11 +429,40 @@ Handlers :::
       service:
           name: httpd
           state: started
-		  
-Handlers --> are used to controll the flow of playbook execution, based on the previous modules
-		This can be done thru notify key.
+		
+Working with Handlers :::
 
-		Handlers are same as tasks.
+---
+# tasks file for testrole1
+      - name: Install-nginx
+        apt:
+          name: nginx
+          state: present
+        notify:
+        - start-nginx
+
+
+---
+# handlers file for testrole1
+    - name: start-nginx
+      service:
+          name: nginx
+          state: started
+
+
+---
+- hosts: samplenode1
+  become: yes
+  roles:
+    - role: testrole1
+
+
+---
+- hosts: {{host_name}}
+  become: yes
+  roles:
+    - role: {{role_name}}	  
+
 
 
 Loops :
@@ -318,16 +480,6 @@ Loops :
       - yum:
          name: vim
          state: present
-
-
-
-
-
-
-
-
-
-
 
 
 Loops :::
@@ -359,8 +511,3 @@ Ansible Roles :::
 			playbooks, handlers, loop, variable, defaults, tasks,
 			
 			
-
-
-
-
-
