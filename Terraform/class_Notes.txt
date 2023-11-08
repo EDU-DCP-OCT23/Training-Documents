@@ -1,0 +1,42 @@
+		
+#########################
+Day - 12 - 8th Nov. 2023
+#########################
+				
+		
+	IAC --> Fundamentals of Terraform ::
+	
+		-- > Terraform is a IAC tools used for Provisioning/Creating the servers.
+		
+			Terraform is Opensource IAC tools
+			It is used to work with any target environment
+			
+		Terraform ::
+		
+			Identify the scope(Target Environment)
+			Write the terraform script (*.tf)
+			terraform init 		-- initialize terraform provider for that target environment 
+			terraform plan      -- review/ validate the terraform script.
+			terraform apply		-- implement the actual change in target environment 
+			
+		
+		1. Install Terraform 			https://developer.hashicorp.com/terraform/downloads
+				Download terraform terraform - package(*.zip)
+				Extract
+				Create Environment Variable to access terraform.
+				
+		2. Create Terraform Scripts 
+				Visual Studio Code			--> Install VSCode in Local Machine. 				https://code.visualstudio.com/download
+					Install Terraform Extensions and create *.tf.
+		3. Create Terraform Scripts
+		
+		
+			Using Terraform :::
+			
+				--> Create/Add Resource			+
+				--> Delete/Destroy Resource 	-
+				--> Update/Change Resource 		~
+				
+		4. Create Access Key & Secret Key.
+		
+		
