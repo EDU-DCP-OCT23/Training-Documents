@@ -39,4 +39,90 @@ Day - 12 - 8th Nov. 2023
 				
 		4. Create Access Key & Secret Key.
 		
+#########################
+Day - 13 - 9th Nov. 2023
+#########################
+						
 		
+		Create AWS EC2-Instance using Terraform.
+		
+			- ami 
+			- key-pair 
+			
+			
+		terraform init 			==> Should the one time activity for a specific project.
+		
+		terraform plan 
+		
+		terraform apply 
+		
+		terraform destroy 
+		
+		
+		
+		Build/Release Cycle 
+			
+			Environments - Build/Test-QA/UAT/PRE-PROD 			===> PROD.
+			
+		Jenkins CICD Pipeline :
+		
+			SCM_Checkout ---> Build ---> Deploy_to_QA
+			
+			
+		Adhoc / Bug-fix /
+		
+			DEV/BUILD/TEST Environments
+			
+		DevOps --> 
+		
+		Scenario 1: creating test servers
+			Pipeline1 : Upstream Job 
+				
+					SCM_Checkout ---> Provision_Server(Terraform)	---> Config_Server(Ansible)
+					
+			Pipeline2 : Downstream Job
+			
+				SCM_Checkout ---> Build ---> Deploy_to_QA
+				
+		Scenario 2: creating test servers
+		
+			SCM_Checkout ---> Appln_Build ---> Provision_Server(Terraform)	---> Config_Server(Ansible) ---> Deploy_to_QA ---> Automate QA_Testing --> Destroy_QA_Server
+			
+																																		|
+																																		|
+																																		
+																																Notify the Users
+			
+		Scenario 2: creating test servers
+		
+			SCM_Checkout ---> Appln_Build ---> Provision_Server(Terraform)	---> Config_Server(Ansible) ---> Deploy_to_QA ---> Automate QA_Testing --> Destroy_QA_Server
+			
+			
+			QA			--> Testing  
+			UAT 		--> testing 
+			
+		Pipeline ::	
+			SCM_Checkout
+			Appln_Build
+			
+			Provision_QA_Server(Terraform)	---> Config_Server(Ansible)
+			Deploy_to_QA
+			Automate QA_Testing  ---> Notify the Users
+			Destroy_QA_Server
+			
+			(Upon_Successful QA_testing) 
+			Provision_UAT_Server(Terraform)	---> Config_Server(Ansible)
+			Deploy_to_UAT
+			Automate UAT_Testing  ---> Notify the Users
+			Destroy_UAT_Server			
+			
+			(Upon_Successful UAT_testing)			
+			Deploy_to_PROD
+			
+			
+		waterfall ==> Agile ==> DevOps ==> DevSecOps ==> SRE ==> GitOps ==> MLOps ==> AIOps,............... 
+						
+			
+Next :
+		Docker 
+					
