@@ -1,0 +1,142 @@
+
+#########################
+Day - 14 - 10th Nov. 2023
+#########################	
+
+
+		Containerization ::: using Docker! & Deployments using Kubernetes!
+		
+			Containerization ??? Why ??? How ???
+		
+				Micro-Service Based Applications 
+				
+			Application Deployment!!! 
+			
+			Virtual Machine ::
+			
+				- VMs are called as Hardware level Virualization
+				- It is created by using Hypervisor on top of Base OS
+				- VMs are used to run Operating Systems, It share the underlying Hardware resources
+				- It is slower to start the system, It consume some considerable amount of volume.
+				- The resources are attached the VM till the VM is down.
+				
+			
+				Hypervisor!
+			
+			Containers ::
+			
+				- Containers are Operating System level Virualization
+				- Containers are created using Container Engine
+				- Containers are used to run only the application. NOT Operating System.
+				- It is faster and consume less volume and cpu resources 
+				- Once the Task/Application is completed Container will go to exit state & it free up all the resources used by that container.
+				- Containers uses Control Groups & Namespace
+				
+				3 - Tier application Architecture ::
+				
+					F/A/B ==> Service - payment 
+					
+					C1 ==> (F/A/B)
+
+					F - C1
+					A - C2 
+					B - C3 
+					ex - C4
+			
+			
+			
+			Infra-Structure Perspective :::
+				
+				Containers are mainly used to reduce the VMs and save lot of VM cost.
+				
+					Jenkins :::
+					
+						Jenkins_Master(VM) 				==> Create Jenkins Pipeline jobs & Scheduling the builds.	
+							Jenkins_Slave1(VM)			==> Java appln_build 
+							Jenkins_Slave2(VM) 			==> .net
+							Jenkins_Slave3(VM)			==> python
+							Jenkins_Slave4(VM)			==> NodeJS 
+							Jenkins_Slave5(VM)			==> Angular 
+							
+						Jenkins_Master(VM) 				==> Create Jenkins Pipeline jobs & Scheduling the builds.	
+							Build_Server_Slave1(VM)		==> Appln_build 
+								Container-Engine
+									C1			==> Java appln_build
+									C2          ==> .net
+									C3          ==> python
+									C4          ==> NodeJS 
+									C5          ==> Angular 
+						
+					
+			
+			Development/Deployment Perspective :::
+			
+				Containerization ==> It is a process of packaging the application along with its dependencies.
+				
+				Dev:
+					Code 
+					Build ==> compiled, created artifacts -> mywebapp.war 
+					payment.war  Openjdk11,tomcat 8.0 
+					signin.war   jdk1.8,tomcat 8.5 
+					
+					
+					Unit Testing ==> 
+										Openjdk11,tomcat 8.0 == Executed mywebapp.war
+										
+					Create Package(Image) ==> (mywebapp.war,Openjdk11,tomcat 8.0) --> mywebapp-pkg1
+				
+				Deployed 
+				
+					QA(VM) ==> mywebapp.war - jdk1.7,tomcat9.0 --> config Issue.
+					
+					QA == mywebapp-pkg1 # Deploy the application package and run it as a container.
+					
+							C1 -> (OS_Image,tomcat,openjdk,*.war)
+							
+				
+				
+				Terminologies :::
+				
+					Image				==> Static file composed of various layers. It is Non-Executable
+					Container			==> Executable Compontent of Image.
+					Container Registry	==> Used to store and manage the container Images - docker hub - 
+											hub.docker.com
+					Repository 			==> Sub-set of Container Registry
+					Volumes				==> Used to exec some stateful application. 
+					
+				
+				Open-Source 
+				
+				Managed Services 
+				
+					AWS 	--> ECS,ECR,EKS
+					AZ 		--> ACS,ACR,AKS
+					GCP 	--> GCS,GCR,GKS
+					
+										
+										
+										
+				Installation of container Engine :::  https://docs.docker.com/engine/install/
+				
+					Docker Container Engine 
+					
+						apt install docker.io -y
+				
+				Docker CLI - Command to interact with Docker Engine.
+				
+					docker --version 
+					
+					docker images -- get the list of docker images in local machine 
+					docker ps 
+					docker ps -a 
+					docker run		used to create and execute the container
+							- Background / Detached Mode 
+									docker run -d centos sleep 30
+							- Foreground / Attached Mode 					# Default
+									docker run centos sleep 30
+							- Interactive Mode
+									docker run -it centos bash
+					
+					docker exec 
+					docker start / stop ...
+				
