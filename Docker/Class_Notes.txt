@@ -255,7 +255,7 @@ Day - 15 - 13th Nov. 2023
 					
 					docker login 
 							docker login -u loksaieta
-									dckr_pat_4B1feQx1DiF4Kn90zGJLgPHJqME
+									
 					
 					docker push 
 
