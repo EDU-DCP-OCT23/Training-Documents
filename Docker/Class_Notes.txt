@@ -83,7 +83,7 @@ Day - 14 - 10th Nov. 2023
 					Unit Testing ==> 
 										Openjdk11,tomcat 8.0 == Executed mywebapp.war
 										
-					Create Package(Image) ==> (mywebapp.war,Openjdk11,tomcat 8.0) --> mywebapp-pkg1
+					Create Package(Image) ==> (mywebapp.war,Openjdk11,tomcat 8.0) --> mywebapp-pkg1:v1.0
 				
 				Deployed 
 				
@@ -127,6 +127,7 @@ Day - 14 - 10th Nov. 2023
 					docker --version 
 					
 					docker images -- get the list of docker images in local machine 
+					docker pull
 					docker ps 
 					docker ps -a 
 					docker run		used to create and execute the container
@@ -140,3 +141,240 @@ Day - 14 - 10th Nov. 2023
 					docker exec 
 					docker start / stop ...
 				
+				
+							
+
+#########################
+Day - 15 - 13th Nov. 2023
+#########################		
+
+			Docker CLI :::
+			Volumes 
+			Create Images 
+				commit 
+				build 
+			Publish Images to docker registry
+			Deployment ::
+				docker compose, swarm
+				Kubernetes 
+				
+				Docker CLI - Command to interact with Docker Engine.
+				
+					docker --version 
+					
+					docker images -- get the list of docker images in local machine 
+					docker pull
+					docker ps 
+					docker ps -a 
+					docker run		used to create and execute the container
+							- Background / Detached Mode 
+									docker run -d centos sleep 30
+							- Foreground / Attached Mode 					# Default
+									docker run centos sleep 30
+							- Interactive Mode
+									docker run -it centos bash
+					
+					docker exec 	==> Login to the running container in interactive mode.
+							docker exec -it <container_id> bash
+						
+					docker start / stop ...		
+
+						docker stop <container_id> <container_id>
+						docker start <container_id> <container_id>
+			
+					docker logs <container_id>
+							tomcat appln. Image ==> */webapps/*.war
+				
+				Port Mapping/Binding ::::
+							Used to Map the Container port and Host Port.
+							This helps to access the applications running inside the containers through host IP Address.
+							
+					C1 --> Tomcat Image ==> 
+					
+					docker pull tomcat:8.0
+					
+					docker run -it tomcat:8.0 bash 		create & run container in interactive mode 
+					
+					docker run -it -p 8085:8080 tomcat:8.0
+					
+					docker run -it -p 8086:8080 tomcat:8.0
+					
+					-p <host_port>:<container_port>
+					
+					<external_Host_Ip_Addr>:<host_port>
+					
+				Docker Image Creation:::
+				
+					Docker Commit
+						==> Create a new image using the container ID.
+
+						c1 --> git,jdk,mvn.... build exit
+						Create --> 
+						
+						docker commit <container_id> <new_image_name>:<tag>
+						
+					Docker Build 					# Application Teams to build Application Images 
+					
+						Dockerfile ==> Instruction/Layers to create container Image.
+						
+						docker build -t <new_image_name>:<tag> .
+						
+					Dockerfile:
+						FROM debian 
+						RUN apt-get update -y
+						RUN apt-get install git -y
+						
+						
+				Docker Volumes ::: 	used to run any stateful applications in the containers
+									In order to permanently manage the input&outfiles, we use volumes 
+									Persistant Data.
+				
+					Container 
+					
+						Stateful Application - Leaves some trace of execution in the form of logfiles/report/artifacts
+						
+						Stateless Application - This will never have any trace of execution.
+				
+					C1 --> front_end
+					C2 --> Application_logic
+					C3 --> Backend 
+					
+					
+					docker volume list 
+					docker volume create vol1						
+					docker volume inspect vol1
+					
+					docker run -it centos bash 
+					docker run -it --mount source=vol1,destination=/vol1 centos	
+
+
+				Publish Images to Docker Registry :::
+				
+					Dockerhub account ID 
+					Dockerhub Access Token.
+					
+					docker login 
+							docker login -u loksaieta
+									dckr_pat_4B1feQx1DiF4Kn90zGJLgPHJqME
+					
+					docker push 
+
+   19  apt update -y
+   20  clear
+   21  apt docker.io -y
+   22  apt install docker.io -y
+   23  docker --version
+   24  docker version
+   25  clear
+   26  docker images
+   27  docker ps
+   28  docker ps -a
+   29  docker pull centos
+   30  docker images
+   31  docker ps -a
+   32  docker run centos bash
+   33  docker ps -a
+   34  docker images
+   35  docker run ubuntu bash
+   36  docker ps
+   37  docker ps -a
+   38  docker  run centos
+   39  docker ps -a
+   40  docker run centos sleep 30
+   41  clear
+   42  docker run centos sleep 30
+   43  asdfasd
+   44  docker run -d centos sleep 30
+   45  docker ps
+   46  clear
+   47  docker ps
+   48  docker run -it centos bash
+   49  ls
+   50  cd /
+   51  ls
+   52  docker run -it centos bash
+   53  docker run -dit centos bash
+   54  docker run -itd centos bash
+   55  clear
+   56  docker ps
+   57  docker ps
+   58  docker stop 5b82c18 a4aa3b
+   59  docker ps
+   60  clear
+   61  docker ps
+   62  clear
+   63  docker ps
+   64  docker images
+   65  docker run -it debian bash
+   66  docker ps -a
+   67  docker  start 6325e306ec8f
+   68  docker exec -it 6325e306ec8f bash
+   69  docker images
+   70  docker commit 6325e306ec8f loksaieta/oct23debgit
+   71  docker images
+   72  docker run -it loksaieta/oct23debgit bash
+   73  docker images
+   74  docker history ubuntu
+   75  docker history loksaieta/oct23debgit:latest
+   76  docker history tomcat:8.0
+   77  clear
+   78  ls
+   79  mkdir docker-contents
+   80  cd docker-contents/
+   81  vi Dockerfile
+   82  cat Dockerfile
+   83  docker build -t loksaieta/oct23dg:v1.0 .
+   84  vi Dockerfile
+   85  docker build -t loksaieta/oct23dg:v1.0 .
+   86  docker images
+   87  docker run -it loksaieta/oct23dg bash
+   88  docker run -it loksaieta/oct23dg:v1.0 bash
+   89  docker history loksaieta/oct23dg:v1.0
+   90  docker ps
+   91  clear
+   92  docker images
+   93  docker volume list
+   94  docker volume create oct23vol1
+   95  docker volume list
+   96  docker volume inspect oct23vol1
+   97  clear
+   98  docker volume inspect oct23vol1
+   99  cd /var/lib/docker/volumes/
+  100  ls
+  101  cd oct23vol1/
+  102  ls
+  103  cd _data/
+  104  ls
+  105  pwd
+  106  docker run -it centos bash
+  107  docker run -it --mount source=oct23vol1,destination=/oct23vol1 centos bash
+  108  ls
+  109  echo "rec1" >> infile1.txt
+  110  ls
+  111  docker run -it --mount source=oct23vol1,destination=/oct23vol1 centos bash
+  112  clear
+  113  cd ~
+  114  docker images
+  115  docker ps -a
+  116  docker rm 3cd065ed8428
+  117  docker ps -a
+  118  docker rm 24ee54 f19270f37 5b82c18 a4aa3b1 441a3a0c4
+  119  docker ps -a
+  120  docker images
+  121  docker rmi e4c58958181a
+  122  docker images
+  123  docker rmi debian
+  124  clear
+  125  docker images
+  126  docker login -u loksaieta
+  127  docker push loksaieta/oct23dg:v1.0
+  128  history
+				
+
+Next ::
+
+		Container Orchestration Tools: 
+		
+			Overview of Docker Swarm / Compose 
+			
+		Kubernetes 
