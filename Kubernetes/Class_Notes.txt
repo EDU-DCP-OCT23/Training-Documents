@@ -1,0 +1,114 @@
+
+#########################
+Day - 16 - 14th Nov. 2023
+#########################								
+			
+		Container Orchestration ::::
+		
+			-> Used to ensure that the applications that are running using the containers are available.
+			
+			-> High-Availability of containers.
+					
+			-> Auto-Scaling 
+			
+			-> Load-Balancing
+			
+			
+		www.amazon.com ==> 
+		
+		
+			mywebapp.war ==> mywebapp_c1 ==> prod.
+			
+			Replicas of containers will be deployed in target environment. 3 
+						
+						
+		Docker ::
+		
+			Docker Compose	: Is used to run multiple containers as single service. 
+				c1,2,3 ==> payment_service
+				Manifest file ==> *.yaml 
+			Docker Swarm 
+				==> Container Orchestration Tools ::: => High-Availability of containers.
+				==> It is meant only for Docker Containers.
+				
+			Kubernetes 
+				==> Is a Open-Source Container Orchestration Tool.
+			
+					-> High-Availability of containers.
+							
+					-> Auto-Scaling 
+					
+					-> Load-Balancing	
+
+			Managed Service ::
+			
+				AWS ==> EKS 
+						
+			
+			1. Kubernetes Architecture & its components
+					Master/Nodes 
+						Kubernetes_Master(VM) 		==> Validate the deployment requests & Schedule the deployment to healthy nodes.
+							Kubernetes_Node1(VM)
+							Kubernetes_Node2(VM)
+							Kubernetes_Node3(VM)
+
+			2. Kubernetes Terminologies
+					Image 
+					Containers 
+					Pods ==> smallest unit of task/schedule in kubernetes - A Pod can have single or more than one container.
+					Container Registry 
+					Container Runtime Interface - ContainerD
+					Cluster ==> Collection of WorkerNodes
+				
+			3. Kubernetes Objects 
+			
+					Pod 
+					Pod Networking
+					Replicaset
+					Deployment 
+					Daemonset 
+					Services 
+					Volumes 
+					
+			4. Installation & Configuration of Kubernetes Master & Workernodes.
+			
+				Steps ::
+				
+					1. Create VMs (1 + 2) 
+					2. Enable the inbound rules to allow all traffic (for Demo)
+					3. In all Master and WorkNodes :
+						- Setup the Node Name.
+						- Install Docker 
+						- Install and Configure CRI - ContainerD
+						- Install Kubernetes - Kubeadm, kubectl, kubelet
+						- Ensure that Kubelet & ContainerD are up and running 
+					4. Only in Master :
+						- Kubeadm init ==> initialize Kubernetes_Master Node
+					5. Only in WorkeNodes :
+						- kubeadm join	==> Used to attach the WorkerNodes to Kubernetes_Master.
+						
+						
+						Kubernetes_Master(VM) 	
+                        	Kubernetes_Node1(VM)
+                        	Kubernetes_Node2(VM)
+                        	Kubernetes_Node3(VM)
+						
+						Kubernetes_Master						
+							Kubernetes_Master1(VM) 	
+								Cluster1 :
+									Kubernetes_Node1(VM)
+									Kubernetes_Node2(VM)
+									Kubernetes_Node3(VM)
+								Cluster2 :
+									Kubernetes_Node1(VM)
+									Kubernetes_Node2(VM)
+									Kubernetes_Node3(VM)
+							Kubernetes_Master2(VM) 	
+								Cluster1 :
+									Kubernetes_Node1(VM)
+									Kubernetes_Node2(VM)
+									Kubernetes_Node3(VM)
+								Cluster2 :
+									Kubernetes_Node1(VM)
+									Kubernetes_Node2(VM)
+									Kubernetes_Node3(VM)
