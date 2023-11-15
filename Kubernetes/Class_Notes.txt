@@ -112,3 +112,97 @@ Day - 16 - 14th Nov. 2023
 									Kubernetes_Node1(VM)
 									Kubernetes_Node2(VM)
 									Kubernetes_Node3(VM)
+
+#########################
+Day - 17 - 15th Nov. 2023
+#########################	
+
+				Kubernetes Objects 
+					Pod 
+					Pod Networking
+					Replicaset
+					Deployment 
+					Daemonset 
+					Services 
+					Volumes 
+					
+				Kubectl ==> Command Line Utility --> 
+				
+				Pods 
+				Pods Networking 
+				
+				
+				Create Pod :::
+				
+				Manifest file :::
+				
+				
+				Kubernetes Services :::
+				
+					ClusterIP
+					NodePort 
+					Load Balancer
+					
+				Kubernetes Controller Objects :::
+					Replication Controller 
+					Replicaset
+					Deployment 
+					Daemonset
+					
+				Replicaset ::: Is used to deploy a specific number of pods 
+				replicas : 5 
+				
+				Application Deployment in Kubernetes 
+				
+					Deployment controller Object :
+					
+						- Used to deploy the pods 
+						- Create replicaset
+						- Perform Scale-up 
+						- Scale-Down 
+						- Upgrade 
+						- RollBack
+						
+				Developer ==> 	mywebapp.war ==> mywebapp:v1.0 ==>
+								mywebapp.war ==> mywebapp:v1.1 ==>
+								mywebapp.war ==> mywebapp:v1.2 ==>
+								mywebapp.war ==> mywebapp:v2.0 ==>
+								
+								
+					Deployment Strategy ::
+						StrategyType:           RollingUpdate
+						
+						
+					pod1 ==> mywebapp:v1.0 
+					
+					Deployment Controller :
+					
+						pod1	==> mywebapp:v1.0 
+						pod2	==> mywebapp:v1.0 
+						pod3	==> mywebapp:v1.0 
+
+
+							Upgrade to mywebapp:v1.1 ??
+							
+						pod1 	==> mywebapp:v1.1
+						pod2	==> mywebapp:v1.1
+						
+				Replicaset 	::: Is used to deploy a specific number of pods 
+				Daemonset 	::: Is used to run a copy of pod in all the available nodes or some group of nodes.
+								Run - Monitoring/Logging tools 
+								
+						Kubernetes_Master(VM) 	
+                        	Kubernetes_Node1(VM)
+                        	Kubernetes_Node2(VM)
+                        	Kubernetes_Node3(VM)
+
+				Namespace :: Logical partitioning of Cluster.
+								To run/deploy the pods in an isolated environment within the cluster.
+								
+								WN1,2,3,4,5,6,7,8,9
+								
+				Environments: 
+				
+					DEV 
+					QA 
+					UAT 
