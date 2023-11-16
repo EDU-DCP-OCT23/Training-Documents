@@ -206,3 +206,75 @@ Day - 17 - 15th Nov. 2023
 					DEV 
 					QA 
 					UAT 
+
+#########################
+Day - 18 - 16th Nov. 2023
+#########################
+
+
+		Kubernetes Controller Objects :::
+			Replication Controller 		==> uses equality based operator - environment = QA
+			Replicaset					==> set based operator 			 - environment = {Dev,QA}
+			Deployment 
+			Daemonset
+			Namespace
+		
+			Kubernetes Services ::
+			
+				Nodeport 			==> Used to expose the pods to internet 
+				
+				ClusterIP			==> Used to access the pods within the cluster 
+				
+				Load Balancer 
+				
+				Labels and Selector are used to map the Pods with Service.
+			
+			Volumes ::
+				
+				emptyDir
+				
+				Persistant Volume 
+				Persistant Volume Claim 
+				
+				ConfigMap 
+				Secrets 
+				
+				Hostpath 
+				
+			
+				1 TB of Volume ??
+				Such huge volumes are procured formed external storage servers(AWS EBS/AZ/GPV/Onprem-storage servers)
+			
+			
+				Node Selector :::
+			
+				Package Manager for Kubernetes :::
+					
+					HELM Package Manager - Used to install the packages for Kubernetes. 
+					
+	End - to - end CICD Pipeline Demo :::
+	
+	Continuous Monitoring ::: 
+	
+			Infra-Structure Monitoring  ==> Promethus/Grafana/Nagios/Dynatrace
+				
+					CPU/Memory/Traffic 
+					
+					Prometheus  => It is a monitoring & Alerting Tool 
+					Grafana		=> It is a Visualization Tool 
+			
+			Application Monitoring
+			
+			
+			Production/Support Monitoring Team
+			
+Next :::			
+				-> Install and Configure Prometheus/Grafana.
+				-> Prometheus Agent - Node Exporter 
+				-> Prometheus Database - Time Series Database 
+				-> PromQL
+				-> Integration of Prometheus with Grafana 
+				-> Create Dashboards
+				
+				
+				CICD Demo. 
